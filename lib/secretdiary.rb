@@ -14,12 +14,18 @@ class SecretDiary
   end
 
   def unlock
-    @locked = false if locked?
+    fail 'Cannot unlock: diary already unlocked' if !locked?
+    @locked = false
   end
 
+  def lock
+    fail 'Cannot lock: diary already locked' if locked?
+    @locked = true
+  end
+  
   private
 
   def locked?
-    @locked = true
+    @locked == true
   end
 end
