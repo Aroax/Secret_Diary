@@ -36,14 +36,16 @@ describe SecretDiary do
   end
 
   context 'when unlocked' do
+    before do
+      diary.unlock(password)
+    end
     it 'raises an error if you try to unlock' do
-      subject.unlock(password)
-      expect{ subject.unlock(password) }.to raise_error 'Cannot unlock: diary already unlocked'
+      expect{ diary.unlock(password) }.to raise_error 'Cannot unlock: diary already unlocked'
     end
 
-    # it 'can add an entry' do
-    #
-    # end
+    it 'can add an entry' do
+      expect(diary.add_entry(content)).to be_an_instance_of(Array)
+    end
   end
 
 end
